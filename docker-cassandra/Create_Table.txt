@@ -1,0 +1,45 @@
+#Used Offical Apache Cassandra docker image
+
+#Create Keyspace
+Create keyspace covid_slots with replication = {'class':'SimpleStrategy','replication_factor':1};
+
+#Create State Table
+CREATE TABLE covid_slots.india_daily_statistics (
+    date date,
+    confirmed int,
+    confirmed_week_window int,
+    confirmed_Total int,
+    CFR double,
+    CFR_week_window double,
+    deceased int,
+    deceased_week_window int,
+    deceased_Total int,
+    recovered int,
+    recovered_week_window int,
+    recovered_Total int,
+    TPR double,
+    TPR_week_window double,
+    state text,
+    vaccinated1 int,
+    vaccinated1_week_window int,
+    vaccinated1_Total int,
+    vaccinated2 int,
+    vaccinated2_week_window int,
+    vaccinated2_Total int,
+    PRIMARY KEY (date, state)
+) WITH CLUSTERING ORDER BY (date DESC);
+
+
+#Create District Table
+CREATE TABLE covid_slots.india_district_daily_statistics (
+    date date,
+    confirmed_total int,
+    deceased_total int,
+    district text,
+    other_total int,
+    recovered_total int,
+    state text,
+    tested_total int,
+    PRIMARY KEY (date, state, district)
+);
+

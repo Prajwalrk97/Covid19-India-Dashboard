@@ -1,0 +1,1 @@
+docker compose up -d && timeout 5 && docker exec -it kafka sh -c "/kafkatopic.sh"
